@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My university campus</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_problem_list">Problems</string>
+    <string name="title_problem_detail">Problem Detail</string>
+</resources>
