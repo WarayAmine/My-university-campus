@@ -1,9 +1,12 @@
 package com.eservices.waray.myuniversitycampus;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.eservices.waray.myuniversitycampus.adapter.ProblemsRecyclerViewAdapter;
 import com.eservices.waray.myuniversitycampus.dummy.DummyContent;
+import com.eservices.waray.myuniversitycampus.entity.Problem;
+import com.eservices.waray.myuniversitycampus.model.ProblemViewModel;
 
 import java.util.List;
 
@@ -33,6 +39,8 @@ public class ProblemListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+    private ProblemViewModel problemViewModel;
+    private ProblemsRecyclerViewAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +55,7 @@ public class ProblemListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
         });
@@ -60,81 +68,103 @@ public class ProblemListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
+        problemViewModel = ViewModelProviders.of(this).get(ProblemViewModel.class);
+        mAdapter = new ProblemsRecyclerViewAdapter(this, problemViewModel.getAllProblems().getValue(), mTwoPane);
+        problemViewModel.getAllProblems().observe(this, new Observer<List<Problem>>() {
+            @Override
+            public void onChanged(@Nullable List<Problem> allProblems) {
+                //update the cached problems in adapter
+//                problems = allProblems;
+                mAdapter.setAllProblems(allProblems);
+            }
+        });
+
+
         View recyclerView = findViewById(R.id.problem_list);
         assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        setupRecyclerView((RecyclerView) recyclerView, mAdapter);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView, ProblemsRecyclerViewAdapter problemsRecyclerViewAdapter) {
+        recyclerView.setAdapter(problemsRecyclerViewAdapter);
     }
 
-    public static class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-
-        private final ProblemListActivity mParentActivity;
-        private final List<DummyContent.DummyItem> mValues;
-        private final boolean mTwoPane;
-        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
-                if (mTwoPane) {
-                    Bundle arguments = new Bundle();
-                    arguments.putString(ProblemDetailFragment.ARG_ITEM_ID, item.id);
-                    ProblemDetailFragment fragment = new ProblemDetailFragment();
-                    fragment.setArguments(arguments);
-                    mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.problem_detail_container, fragment)
-                            .commit();
-                } else {
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, ProblemDetailActivity.class);
-                    intent.putExtra(ProblemDetailFragment.ARG_ITEM_ID, item.id);
-
-                    context.startActivity(intent);
-                }
-            }
-        };
-
-        SimpleItemRecyclerViewAdapter(ProblemListActivity parent,
-                                      List<DummyContent.DummyItem> items,
-                                      boolean twoPane) {
-            mValues = items;
-            mParentActivity = parent;
-            mTwoPane = twoPane;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.problem_list_content, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
-
-            holder.itemView.setTag(mValues.get(position));
-            holder.itemView.setOnClickListener(mOnClickListener);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView mIdView;
-            final TextView mContentView;
-
-            ViewHolder(View view) {
-                super(view);
-                mIdView = (TextView) view.findViewById(R.id.id_text);
-                mContentView = (TextView) view.findViewById(R.id.content);
-            }
-        }
-    }
 }
+
+//    public static class SimpleItemRecyclerViewAdapter
+//            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
+//
+//        private final ProblemListActivity mParentActivity;
+//        private List<Problem> mValues;
+//        private final boolean mTwoPane;
+//        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
+//                Problem item = (Problem) view.getTag();
+//                if (mTwoPane) {
+//                    Bundle arguments = new Bundle();
+////                    arguments.putString(ProblemDetailFragment.ARG_ITEM_ID, item.id);
+//                    arguments.putSerializable(ProblemDetailFragment.ARG_ITEM_ID, item);
+//                    ProblemDetailFragment fragment = new ProblemDetailFragment();
+//                    fragment.setArguments(arguments);
+//                    mParentActivity.getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.problem_detail_container, fragment)
+//                            .commit();
+//                } else {
+//                    Context context = view.getContext();
+//                    Intent intent = new Intent(context, ProblemDetailActivity.class);
+//                    intent.putExtra(ProblemDetailFragment.ARG_ITEM_ID, item);
+//
+//                    context.startActivity(intent);
+//                }
+//            }
+//        };
+//
+//        SimpleItemRecyclerViewAdapter(ProblemListActivity parent,
+//                                      List<Problem> items,
+//                                      boolean twoPane) {
+//            mValues = items;
+//            mParentActivity = parent;
+//            mTwoPane = twoPane;
+//        }
+//
+//        public void setAllProblems(List<Problem> problems){
+//            mValues = problems;
+//            notifyDataSetChanged();
+//        }
+//
+//        @Override
+//        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//            View view = LayoutInflater.from(parent.getContext())
+//                    .inflate(R.layout.problem_list_content, parent, false);
+//            return new ViewHolder(view);
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(final ViewHolder holder, int position) {
+//            holder.mIdView.setText(mValues.get(position).getId().toString());
+//            holder.mContentView.setText(mValues.get(position).getDescription());
+//
+//            holder.itemView.setTag(mValues.get(position));
+//            holder.itemView.setOnClickListener(mOnClickListener);
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            if(mValues != null)
+//                return mValues.size();
+//            else return 0;
+//        }
+//
+//        class ViewHolder extends RecyclerView.ViewHolder {
+//            final TextView mIdView;
+//            final TextView mContentView;
+//
+//            ViewHolder(View view) {
+//                super(view);
+//                mIdView = (TextView) view.findViewById(R.id.id_text);
+//                mContentView = (TextView) view.findViewById(R.id.content);
+//            }
+//        }
+//    }

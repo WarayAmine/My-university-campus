@@ -53,8 +53,8 @@ public class ProblemDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ProblemDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ProblemDetailFragment.ARG_ITEM_ID));
+            arguments.putSerializable(ProblemDetailFragment.ARG_ITEM_ID,
+                    getIntent().getSerializableExtra(ProblemDetailFragment.ARG_ITEM_ID));
             ProblemDetailFragment fragment = new ProblemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

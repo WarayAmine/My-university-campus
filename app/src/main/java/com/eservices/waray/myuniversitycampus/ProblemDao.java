@@ -21,7 +21,10 @@ public interface ProblemDao {
     void updateProblem(Problem problem);
 
     @Query("SELECT * FROM Problem WHERE id = :problemId")
-    Problem getOneProblemById (double problemId);
+    Problem getOneProblemById (int problemId);
+
+    @Query("SELECT * FROM Problem WHERE id = :problemId")
+    LiveData<Problem> getLiveDataProblemById (int problemId);
 
     @Query("SELECT * FROM Problem")
     LiveData<List<Problem>> getAllProblems();

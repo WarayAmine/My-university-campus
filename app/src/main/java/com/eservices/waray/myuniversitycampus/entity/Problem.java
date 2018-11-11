@@ -9,10 +9,11 @@ import android.support.annotation.NonNull;
 import com.eservices.waray.myuniversitycampus.converters.DateConverter;
 import com.eservices.waray.myuniversitycampus.converters.TimeConverter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Problem {
+public class Problem implements Serializable{
 
     @PrimaryKey(autoGenerate = true)
     @NonNull

@@ -20,6 +20,14 @@ public class ProblemViewModel extends AndroidViewModel {
         allProblems = problemRepository.getAllProblems();
     }
 
+    public Problem getProblemById(int id){
+        return problemRepository.getProblemById(id);
+    }
+
+    public LiveData<Problem> getLiveDataProblem(int id){
+        return problemRepository.getLiveDataProblem(id);
+    }
+
     public LiveData<List<Problem>> getAllProblems(){
         return allProblems;
     }
