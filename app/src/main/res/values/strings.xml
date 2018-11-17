@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">My university campus</string>
     <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_problem_list">Problems</string>
     <string name="title_problem_detail">Problem Detail</string>
+    <string name="add_new_problem_title">Ajouter</string>
+    <string name="add_new_problem">Ajouter un problème</string>
+    <string name="add_new_problem_description">Description</string>
+    <string name="add_new_problem_address">Adresse</string>
+    <string name="add_new_problem_type">Type</string>
+    <string name="create">VALIDER</string>
+
 </resources>

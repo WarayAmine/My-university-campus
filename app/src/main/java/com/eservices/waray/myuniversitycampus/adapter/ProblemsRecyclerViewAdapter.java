@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eservices.waray.myuniversitycampus.ProblemDetailActivity;
@@ -69,7 +70,18 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mIdView.setText(mValues.get(position).getId().toString());
-        holder.mContentView.setText(mValues.get(position).getDescription());
+        holder.mDescription.setText(mValues.get(position).getDescription());
+        holder.mAddress.setText(mValues.get(position).getAddress());
+        holder.mDate.setText(mValues.get(position).getDate().toString());
+        holder.mType.setText(mValues.get(position).getType().toString());
+        String imgResource = "type"+mValues.get(position).getType().getTypeValue();
+        int imgID;
+        try {
+            imgID = R.mipmap.class.getField(imgResource).getInt(null);
+            holder.imageView.setImageResource(imgID);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
 
         holder.itemView.setTag(mValues.get(position));
         holder.itemView.setOnClickListener(mOnClickListener);
@@ -84,12 +96,20 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
 
     class ViewHolder extends RecyclerView.ViewHolder {
         final TextView mIdView;
-        final TextView mContentView;
+        final TextView mDescription;
+        final TextView mDate;
+        final TextView mAddress;
+        final TextView mType;
+        final ImageView imageView;
 
         ViewHolder(View view) {
             super(view);
             mIdView = (TextView) view.findViewById(R.id.id_text);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mDescription = (TextView) view.findViewById(R.id.description);
+            mAddress = (TextView) view.findViewById(R.id.textViewAddress);
+            mDate = (TextView) view.findViewById(R.id.textViewDate);
+            mType = (TextView) view.findViewById(R.id.textViewType);
+            imageView = (ImageView) view.findViewById(R.id.imageViewType);
         }
     }
 }

@@ -12,9 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ProblemListActivity"
             android:label="@string/title_problem_list"
@@ -34,6 +32,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.eservices.waray.myuniversitycampus.ProblemListActivity" />
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".AddNewProblemActivity"></activity>
     </application>
 
 </manifest>

@@ -137,7 +137,7 @@ public class Problem implements Serializable{
         this.time = time;
     }
 
-    public enum ProblemType {
+    public static enum ProblemType {
         ARBRE_TRAILLER("Arbre à trailler", 0),
         ARBRE_ABATTRE("Arbre à abattre", 1),
         DETRUITS("Détruits", 2),
@@ -164,6 +164,10 @@ public class Problem implements Serializable{
         @TypeConverter
         public static int getProblemTypeValue(ProblemType problemType){
             return problemType.typeValue;
+        }
+
+        public int getTypeValue(){
+            return typeValue;
         }
 
         @Override

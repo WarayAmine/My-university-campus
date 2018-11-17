@@ -1,9 +1,6 @@
 package com.eservices.waray.myuniversitycampus;
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,12 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.annimon.stream.Stream;
-import com.eservices.waray.myuniversitycampus.dummy.DummyContent;
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 import com.eservices.waray.myuniversitycampus.model.ProblemViewModel;
-
-import java.util.List;
 
 /**
  * A fragment representing a single Problem detail screen.
@@ -58,7 +51,7 @@ public class ProblemDetailFragment extends Fragment {
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.getId().toString());
+                appBarLayout.setTitle(mItem.getType().toString());
             }
         }
     }
@@ -70,7 +63,9 @@ public class ProblemDetailFragment extends Fragment {
 
         // Show the problem content as text in a layout
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.problem_detail)).setText(mItem.getDescription());
+            ((TextView) rootView.findViewById(R.id.pDescription)).setText(mItem.getDescription());
+            ((TextView) rootView.findViewById(R.id.pDate)).setText(mItem.getDate().toString());
+            ((TextView) rootView.findViewById(R.id.pAddress)).setText(mItem.getAddress());
         }
 
         return rootView;

@@ -56,9 +56,9 @@ public abstract class ProblemRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void ...params){
             problemDao.deleteAll();
-            Problem problem = new Problem("morocco","This is Morocco !",120,20, Problem.ProblemType.ARBRE_TRAILLER,false, new Date(), new Date());
+            Problem problem = new Problem("Devant la MDE","Un arbre au milieu du jardin en face à la MDE",120,20, Problem.ProblemType.ARBRE_TRAILLER,false, new Date(), new Date());
             problemDao.insertProblem(problem);
-            problem = new Problem("france", "This is France !", 120,20, Problem.ProblemType.AUTRE,false, new Date(), new Date());
+            problem = new Problem("A côté du bâtiment M5", "Des détruits à ramasser", 120,20, Problem.ProblemType.DETRUITS,false, new Date(), new Date());
             problemDao.insertProblem(problem);
             return null;
         }
