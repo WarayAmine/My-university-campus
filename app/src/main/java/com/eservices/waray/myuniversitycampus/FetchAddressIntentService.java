@@ -45,13 +45,20 @@ public class FetchAddressIntentService extends IntentService {
         double lat = intent.getDoubleExtra(Constants.LOCATION_LAT,0);
         double lng = intent.getDoubleExtra(Constants.LOCATION_LNG,0);
 
+        if (lat == 0 || lng == 0) {
+            errorMessage = getString(R.string.no_location_data_provided);
+            Log.wtf(TAG, errorMessage);
+            deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
+            return;
+        }
+
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 
         List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocation(lat,lng,1);
         } catch (IOException e){
-            errorMessage = getString(R.string.invalid_lat_long_used);
+            errorMessage = getString(R.string.service_not_available);
             Log.e(TAG, errorMessage, e);
         } catch (IllegalArgumentException illegalArgumentException) {
             // Catch invalid latitude or longitude values.

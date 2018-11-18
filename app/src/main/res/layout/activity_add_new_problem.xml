@@ -63,14 +63,14 @@
             android:id="@+id/textViewAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/item_background"
             android:elevation="1dp"
             android:hint="@string/add_new_problem_address"
             android:padding="@dimen/text_margin8"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonGeocoder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -129,6 +129,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+
+        <Button
+            android:id="@+id/buttonGeocoder"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="go"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewAddress" />
 
     </android.support.constraint.ConstraintLayout>
 

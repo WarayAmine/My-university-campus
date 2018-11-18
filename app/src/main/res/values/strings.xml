@@ -17,5 +17,7 @@
     <string name="invalid_lat_long_used">Latitude et longitude invalides</string>
     <string name="no_address_found">Désolé, pas d\'adresse trouvée</string>
     <string name="address_found">Adresse trouvée</string>
+    <string name="service_not_available">Désolé, opération impossible</string>
+    <string name="no_location_data_provided">Pas de location trouvée</string>
 
 </resources>

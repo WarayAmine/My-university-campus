@@ -1,14 +1,10 @@
 package com.eservices.waray.myuniversitycampus;
 
 import android.Manifest;
-import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationProvider;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.annotation.NonNull;
@@ -17,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,10 +26,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import java.io.IOException;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class AddNewProblemActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -43,6 +35,7 @@ public class AddNewProblemActivity extends AppCompatActivity
 
     private Spinner spinner;
     private Button button;
+    private Button buttonGeocoder;
     private TextView textViewAddress;
     private TextView textViewDescription;
     private Problem.ProblemType problemType;
@@ -66,7 +59,7 @@ public class AddNewProblemActivity extends AppCompatActivity
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getLocation();
-        startIntentService();
+//        startIntentService();
 
         intent = new Intent(this,ProblemListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -84,6 +77,13 @@ public class AddNewProblemActivity extends AppCompatActivity
                 problem = new Problem(textViewAddress.getText().toString(),textViewDescription.getText().toString(),500,400,problemType,false,new Date(),new Date());
                 problemViewModel.insertProblem(problem);
                 startActivity(intent);
+            }
+        });
+        buttonGeocoder = findViewById(R.id.buttonGeocoder);
+        buttonGeocoder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startIntentService();
             }
         });
     }
@@ -196,6 +196,7 @@ public class AddNewProblemActivity extends AppCompatActivity
             // Display the address string or an error message sent from the intent service.
             address = resultData.getString(Constants.RESULT_DATA_KEY);
             Toast.makeText(getApplicationContext(),address,Toast.LENGTH_SHORT).show();
+            textViewAddress.setText(address);
 
         }
     }
