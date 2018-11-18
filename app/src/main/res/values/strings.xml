@@ -10,5 +10,12 @@
     <string name="add_new_problem_address">Adresse</string>
     <string name="add_new_problem_type">Type</string>
     <string name="create">VALIDER</string>
+    <string name="location_access_required">L\'accès à la localisation est requis pouvoir ajouter un problème</string>
+    <string name="ok">OK</string>
+    <string name="location_unavailable">Localisation impossible</string>
+    <string name="location_access_denied">L\'accès à la localisation refusé</string>
+    <string name="invalid_lat_long_used">Latitude et longitude invalides</string>
+    <string name="no_address_found">Désolé, pas d\'adresse trouvée</string>
+    <string name="address_found">Adresse trouvée</string>
 
 </resources>
