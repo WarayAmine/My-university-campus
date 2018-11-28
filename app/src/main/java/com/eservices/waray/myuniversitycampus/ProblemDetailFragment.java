@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 import com.eservices.waray.myuniversitycampus.model.ProblemViewModel;
 
+import java.text.SimpleDateFormat;
+
 /**
  * A fragment representing a single Problem detail screen.
  * This fragment is either contained in a {@link ProblemListActivity}
@@ -24,8 +26,6 @@ public class ProblemDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
-
-    private ProblemViewModel problemViewModel;
 
     /**
      * The dummy content this fragment is presenting.
@@ -64,7 +64,7 @@ public class ProblemDetailFragment extends Fragment {
         // Show the problem content as text in a layout
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.pDescription)).setText(mItem.getDescription());
-            ((TextView) rootView.findViewById(R.id.pDate)).setText(mItem.getDate().toString());
+            ((TextView) rootView.findViewById(R.id.pDate)).setText(new SimpleDateFormat("dd-MM-yyyy").format(mItem.getDate()));
             ((TextView) rootView.findViewById(R.id.pAddress)).setText(mItem.getAddress());
         }
 

@@ -16,6 +16,7 @@ import com.eservices.waray.myuniversitycampus.ProblemListActivity;
 import com.eservices.waray.myuniversitycampus.R;
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRecyclerViewAdapter.ViewHolder> {
@@ -72,7 +73,7 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
         holder.mIdView.setText(mValues.get(position).getId().toString());
         holder.mDescription.setText(mValues.get(position).getDescription());
         holder.mAddress.setText(mValues.get(position).getAddress());
-        holder.mDate.setText(mValues.get(position).getDate().toString());
+        holder.mDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(mValues.get(position).getDate()));
         holder.mType.setText(mValues.get(position).getType().toString());
         String imgResource = "type"+mValues.get(position).getType().getTypeValue();
         int imgID;
