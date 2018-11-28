@@ -1,6 +1,7 @@
 package com.eservices.waray.myuniversitycampus;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import com.eservices.waray.myuniversitycampus.entity.Problem;
+
 /**
  * An activity representing a single Problem detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
@@ -18,19 +21,20 @@ import android.view.MenuItem;
  */
 public class ProblemDetailActivity extends AppCompatActivity {
 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
+        
+        
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                showProblemOnMap();
             }
         });
 
@@ -60,6 +64,16 @@ public class ProblemDetailActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.problem_detail_container, fragment)
                     .commit();
+        }
+    }
+
+    private void showProblemOnMap() {
+        if(getIntent().getSerializableExtra(ProblemDetailFragment.ARG_ITEM_ID)!=null){
+            Problem problem = (Problem) getIntent().getSerializableExtra(ProblemDetailFragment.ARG_ITEM_ID);
+
+            Uri mapUri = Uri.parse("geo:0,0?q="+problem.getLat()+","+problem.getLng()+"("+problem.getType().toString()+")");
+            Intent intent = new Intent(Intent.ACTION_VIEW, mapUri);
+            startActivity(intent);
         }
     }
 

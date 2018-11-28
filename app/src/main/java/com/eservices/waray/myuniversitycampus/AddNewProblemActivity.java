@@ -74,7 +74,7 @@ public class AddNewProblemActivity extends AppCompatActivity
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                problem = new Problem(textViewAddress.getText().toString(),textViewDescription.getText().toString(),500,400,problemType,false,new Date(),new Date());
+                problem = new Problem(textViewAddress.getText().toString(),textViewDescription.getText().toString(),lat,lng,problemType,false,new Date(),new Date());
                 problemViewModel.insertProblem(problem);
                 startActivity(intent);
             }
