@@ -74,8 +74,6 @@ public class ProblemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.problem_detail, container, false);
 
-
-
         // Show the problem content as text in a layout
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.pDescription)).setText(mItem.getDescription());

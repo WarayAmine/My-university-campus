@@ -39,4 +39,8 @@ public class ProblemViewModel extends AndroidViewModel {
     public void deleteProblemById(int id){
         problemRepository.deleteProblem(id);
     }
+
+    public void deleteAllProblems(){
+        problemRepository.deleteAll();
+    }
 }

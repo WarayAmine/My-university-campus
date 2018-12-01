@@ -22,5 +22,7 @@
     <string name="delete">supprimer</string>
     <string name="delete_confirmation">supprimer</string>
     <string name="delete_cancel">annuler</string>
+    <string name="delete_all">vider</string>
+    <string name="add_all">remplir</string>
 
 </resources>
