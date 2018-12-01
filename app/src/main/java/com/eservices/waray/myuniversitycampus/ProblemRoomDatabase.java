@@ -55,7 +55,7 @@ public abstract class ProblemRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void ...params){
-            problemDao.deleteAll();
+//            problemDao.deleteAll();
             return null;
         }
     }

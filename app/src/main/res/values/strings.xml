@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_problem_list">Mon campus</string>
-    <string name="title_problem_detail">Les détaisl</string>
+    <string name="title_problem_detail">Les détails</string>
     <string name="add_new_problem_title">Ajouter</string>
     <string name="add_new_problem">Ajouter un problème</string>
     <string name="add_new_problem_description">Description</string>
