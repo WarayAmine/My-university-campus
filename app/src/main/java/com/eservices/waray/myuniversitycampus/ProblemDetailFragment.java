@@ -77,8 +77,8 @@ public class ProblemDetailFragment extends Fragment {
         // Show the problem content as text in a layout
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.pDescription)).setText(mItem.getDescription());
-            ((TextView) rootView.findViewById(R.id.pDate)).setText(new SimpleDateFormat("dd-MM-yyyy").format(mItem.getDate()));
-            ((TextView) rootView.findViewById(R.id.pAddress)).setText(mItem.getAddress());
+            ((TextView) rootView.findViewById(R.id.pDate)).setText(getText(R.string.porblem_spotted) + " " + new SimpleDateFormat("dd-MM-yyyy").format(mItem.getDate()));
+            ((TextView) rootView.findViewById(R.id.pAddress)).setText("À " + mItem.getAddress());
             ((Button) rootView.findViewById(R.id.buttonDelete)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
