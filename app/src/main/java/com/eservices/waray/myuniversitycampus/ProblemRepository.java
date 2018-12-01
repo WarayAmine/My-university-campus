@@ -37,6 +37,25 @@ public class ProblemRepository {
         new insertAsyncTask(problemDao).execute(problem);
     }
 
+    public void deleteProblem(int id){
+        new deleteProblemByIdAsyncTask(problemDao).execute(id);
+    }
+
+    private class deleteProblemByIdAsyncTask extends AsyncTask<Integer, Void, Void>{
+
+        private ProblemDao mAsyncTaskDao;
+
+        deleteProblemByIdAsyncTask(ProblemDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            mAsyncTaskDao.deleteProblemById(integers[0]);
+            return null;
+        }
+    }
+
     private class getProblemAsyncTask extends AsyncTask<Integer, Void, Problem>{
 
         private ProblemDao mAsyncTaskDao;

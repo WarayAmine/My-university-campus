@@ -32,4 +32,6 @@ public interface ProblemDao {
     @Query("DELETE FROM Problem")
     void deleteAll();
 
+    @Query("DELETE FROM Problem WHERE id = :problemId")
+    void deleteProblemById(int problemId);
 }

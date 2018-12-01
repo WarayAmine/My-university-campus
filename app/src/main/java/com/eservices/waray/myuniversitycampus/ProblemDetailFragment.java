@@ -1,13 +1,16 @@
 package com.eservices.waray.myuniversitycampus;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 import com.eservices.waray.myuniversitycampus.model.ProblemViewModel;
@@ -33,6 +36,8 @@ public class ProblemDetailFragment extends Fragment {
 //    private DummyContent.DummyItem mItem;
     private Problem mItem;
 
+    private ProblemViewModel problemViewModel;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -49,11 +54,17 @@ public class ProblemDetailFragment extends Fragment {
             mItem = (Problem) getArguments().getSerializable(ARG_ITEM_ID);
 
             Activity activity = this.getActivity();
+
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getType().toString());
             }
+
         }
+
+        problemViewModel = ViewModelProviders.of(this).get(ProblemViewModel.class);
+
+
     }
 
     @Override
@@ -66,8 +77,20 @@ public class ProblemDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.pDescription)).setText(mItem.getDescription());
             ((TextView) rootView.findViewById(R.id.pDate)).setText(new SimpleDateFormat("dd-MM-yyyy").format(mItem.getDate()));
             ((TextView) rootView.findViewById(R.id.pAddress)).setText(mItem.getAddress());
+            ((Button) rootView.findViewById(R.id.buttonDelete)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteProblem(mItem.getId());
+                    getActivity().onBackPressed();
+                }
+            });;
         }
 
         return rootView;
     }
+
+    public void deleteProblem(int id){
+        problemViewModel.deleteProblemById(id);
+    }
+
 }
