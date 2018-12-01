@@ -1,7 +1,9 @@
 package com.eservices.waray.myuniversitycampus;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -72,6 +74,8 @@ public class ProblemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.problem_detail, container, false);
 
+
+
         // Show the problem content as text in a layout
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.pDescription)).setText(mItem.getDescription());
@@ -80,8 +84,21 @@ public class ProblemDetailFragment extends Fragment {
             ((Button) rootView.findViewById(R.id.buttonDelete)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteProblem(mItem.getId());
-                    getActivity().onBackPressed();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage(R.string.delete_confirmation)
+                            .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    deleteProblem(mItem.getId());
+                                    getActivity().onBackPressed();
+                                }
+                            })
+                            .setNegativeButton(R.string.delete_cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).create().show();
                 }
             });;
         }

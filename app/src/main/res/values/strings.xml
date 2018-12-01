@@ -19,5 +19,8 @@
     <string name="address_found">Adresse trouvée</string>
     <string name="service_not_available">Désolé, opération impossible</string>
     <string name="no_location_data_provided">Pas de location trouvée</string>
+    <string name="delete">supprimer</string>
+    <string name="delete_confirmation">supprimer</string>
+    <string name="delete_cancel">annuler</string>
 
 </resources>
