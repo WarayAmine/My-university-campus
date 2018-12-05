@@ -75,7 +75,7 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
         holder.mAddress.setText(mValues.get(position).getAddress());
         holder.mDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(mValues.get(position).getDate()));
         holder.mType.setText(mValues.get(position).getType().toString());
-        String imgResource = "type"+mValues.get(position).getType().getTypeValue();
+        String imgResource = "type"+mValues.get(position).getType().getTypeValue()+mValues.get(position).getType().getTypeValue();
         int imgID;
         try {
             imgID = R.mipmap.class.getField(imgResource).getInt(null);

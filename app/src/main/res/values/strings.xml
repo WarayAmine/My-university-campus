@@ -20,13 +20,12 @@
     <string name="service_not_available">Désolé, opération impossible</string>
     <string name="no_location_data_provided">Pas de location trouvée</string>
     <string name="delete">supprimer</string>
-    <string name="delete_confirmation">supprimer</string>
+    <string name="delete_confirmation">Êtes-vous sûr de vouloir supprimer ce problème ?</string>
     <string name="delete_cancel">annuler</string>
     <string name="delete_all">vider</string>
     <string name="add_all">remplir</string>
     <string name="the_problem">le problème</string>
     <string name="porblem_spotted">Repéré le </string>
-    <!--<string name="delete_problem_hint">Vous pouvez supprimer ce problème s\'il est résolu</string>-->
     <string name="delete_problem_hint">Problème résolu ? Supprimez le !</string>
 
 </resources>
