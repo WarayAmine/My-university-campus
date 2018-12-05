@@ -8,6 +8,8 @@
     android:layout_height="match_parent"
     android:layout_marginTop="2dp"
     android:layout_marginBottom="2dp"
+    android:nestedScrollingEnabled="false"
+    android:animateLayoutChanges="false"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ProblemListActivity"
     tools:listitem="@layout/problem_list_content" />
