@@ -1,4 +1,4 @@
-package com.eservices.waray.myuniversitycampus.adapter;
+package com.eservices.waray.myuniversitycampus.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,13 +17,17 @@ import com.eservices.waray.myuniversitycampus.R;
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRecyclerViewAdapter.ViewHolder> {
 
     private final ProblemListActivity mParentActivity;
     private List<Problem> mValues;
     private final boolean mTwoPane;
+    private Map<String, Integer> imagesMap = new HashMap<String, Integer>();
+
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -54,6 +58,8 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
         mValues = items;
         mParentActivity = parent;
         mTwoPane = twoPane;
+        this.setHasStableIds(true);
+//        updateImagesMap();
     }
 
     public void setAllProblems(List<Problem> problems){
@@ -68,6 +74,26 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
         return new ViewHolder(view);
     }
 
+    public void updateImagesMap(){
+        if(imagesMap.size()!=0)
+            mValues.clear();
+        for(Problem p : mValues){
+            String imgResource = "type"+p.getType().getTypeValue()+p.getType().getTypeValue();
+            try {
+                int imgId = R.mipmap.class.getField(imgResource).getInt(null);
+                imagesMap.put(imgResource,imgId);
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public long getItemId(int position) {
+        Problem p = mValues.get(position);
+        return p.getId();
+    }
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mIdView.setText(mValues.get(position).getId().toString());
@@ -76,13 +102,14 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
         holder.mDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(mValues.get(position).getDate()));
         holder.mType.setText(mValues.get(position).getType().toString());
         String imgResource = "type"+mValues.get(position).getType().getTypeValue()+mValues.get(position).getType().getTypeValue();
-        int imgID;
+        int imgID = 0;
         try {
             imgID = R.mipmap.class.getField(imgResource).getInt(null);
             holder.imageView.setImageResource(imgID);
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
+        holder.imageView.setImageResource(imgID);
 
         holder.itemView.setTag(mValues.get(position));
         holder.itemView.setOnClickListener(mOnClickListener);
@@ -112,6 +139,7 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
             mType = (TextView) view.findViewById(R.id.textViewType);
             imageView = (ImageView) view.findViewById(R.id.imageViewType);
         }
+
     }
 }
 

@@ -1,4 +1,4 @@
-package com.eservices.waray.myuniversitycampus;
+package com.eservices.waray.myuniversitycampus.utils;
 
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 

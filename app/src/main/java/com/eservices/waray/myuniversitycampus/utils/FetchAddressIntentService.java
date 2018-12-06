@@ -1,15 +1,16 @@
-package com.eservices.waray.myuniversitycampus;
+package com.eservices.waray.myuniversitycampus.utils;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.eservices.waray.myuniversitycampus.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

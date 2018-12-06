@@ -1,10 +1,10 @@
-package com.eservices.waray.myuniversitycampus.model;
+package com.eservices.waray.myuniversitycampus.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
-import com.eservices.waray.myuniversitycampus.ProblemRepository;
+import com.eservices.waray.myuniversitycampus.database.ProblemRepository;
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class ProblemViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Problem>> getAllProblems(){
-        return allProblems;
+        return problemRepository.getAllProblems();
     }
 
     public void insertProblem(Problem problem){

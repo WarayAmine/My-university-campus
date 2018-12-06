@@ -1,4 +1,4 @@
-package com.eservices.waray.myuniversitycampus;
+package com.eservices.waray.myuniversitycampus.database;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -9,8 +9,6 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.eservices.waray.myuniversitycampus.entity.Problem;
-
-import java.util.Date;
 
 @Database(entities = {Problem.class}, version = 2, exportSchema = false)
 public abstract class ProblemRoomDatabase extends RoomDatabase {

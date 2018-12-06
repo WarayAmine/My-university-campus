@@ -1,4 +1,4 @@
-package com.eservices.waray.myuniversitycampus;
+package com.eservices.waray.myuniversitycampus.database;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -30,12 +30,16 @@ public class ProblemRepository {
     }
 
     public LiveData<List<Problem>> getAllProblems(){
-        return allProblems;
+        return problemDao.getAllProblems();
     }
 
     public void insertProblem(Problem problem){
         new insertAsyncTask(problemDao).execute(problem);
     }
+
+
+
+
 
     public void deleteProblem(int id){new deleteProblemByIdAsyncTask(problemDao).execute(id);}
 

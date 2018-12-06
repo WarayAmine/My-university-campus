@@ -1,4 +1,4 @@
-package com.eservices.waray.myuniversitycampus;
+package com.eservices.waray.myuniversitycampus.database;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -26,7 +26,7 @@ public interface ProblemDao {
     @Query("SELECT * FROM Problem WHERE id = :problemId")
     LiveData<Problem> getLiveDataProblemById (int problemId);
 
-    @Query("SELECT * FROM Problem")
+    @Query("SELECT * FROM Problem ORDER BY date DESC")
     LiveData<List<Problem>> getAllProblems();
 
     @Query("DELETE FROM Problem")

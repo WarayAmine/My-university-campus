@@ -1,20 +1,17 @@
 package com.eservices.waray.myuniversitycampus;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import com.eservices.waray.myuniversitycampus.entity.Problem;
-import com.eservices.waray.myuniversitycampus.model.ProblemViewModel;
 
 import static com.eservices.waray.myuniversitycampus.ProblemDetailFragment.ARG_ITEM_ID;
 
@@ -27,6 +24,7 @@ import static com.eservices.waray.myuniversitycampus.ProblemDetailFragment.ARG_I
 public class ProblemDetailActivity extends AppCompatActivity {
 
     Problem problem;
+    ImageView imageViewDetailType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +47,36 @@ public class ProblemDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        imageViewDetailType = findViewById(R.id.imageViewDetailsType);
+
+        if(getIntent().getSerializableExtra(ARG_ITEM_ID)!=null){
+            problem = (Problem) getIntent().getSerializableExtra(ARG_ITEM_ID);
+        }
+
+        String imgResource = "typewhite"+problem.getType().getTypeValue();
+        int imgID;
+        try {
+            imgID = R.mipmap.class.getField(imgResource).getInt(null);
+            imageViewDetailType.setImageResource(imgID);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
 
         if (savedInstanceState == null) {
+
             Bundle arguments = new Bundle();
             arguments.putSerializable(ARG_ITEM_ID,
                     getIntent().getSerializableExtra(ARG_ITEM_ID));
+
             ProblemDetailFragment fragment = new ProblemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.problem_detail_container, fragment)
                     .commit();
         }
+
+
+
     }
 
     private void showProblemOnMap() {

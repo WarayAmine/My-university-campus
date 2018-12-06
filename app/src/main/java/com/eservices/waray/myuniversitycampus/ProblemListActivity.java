@@ -2,7 +2,6 @@ package com.eservices.waray.myuniversitycampus;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,22 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.eservices.waray.myuniversitycampus.adapter.ProblemsRecyclerViewAdapter;
-import com.eservices.waray.myuniversitycampus.dummy.DummyContent;
+import com.eservices.waray.myuniversitycampus.utils.ProblemsRecyclerViewAdapter;
 import com.eservices.waray.myuniversitycampus.entity.Problem;
-import com.eservices.waray.myuniversitycampus.model.ProblemViewModel;
+import com.eservices.waray.myuniversitycampus.viewmodel.ProblemViewModel;
 
 import java.util.List;
 
-import static com.eservices.waray.myuniversitycampus.Constants.staticProblems;
+import static com.eservices.waray.myuniversitycampus.utils.Constants.staticProblems;
 
 /**
  * An activity representing a list of Problems. This activity
@@ -77,12 +71,11 @@ public class ProblemListActivity extends AppCompatActivity {
 
         problemViewModel = ViewModelProviders.of(this).get(ProblemViewModel.class);
         mAdapter = new ProblemsRecyclerViewAdapter(this, problemViewModel.getAllProblems().getValue(), mTwoPane);
-        mAdapter.setHasStableIds(true);
         problemViewModel.getAllProblems().observe(this, new Observer<List<Problem>>() {
+
             @Override
             public void onChanged(@Nullable List<Problem> allProblems) {
                 //update the cached problems in adapter
-//                problems = allProblems;
                 mAdapter.setAllProblems(allProblems);
             }
         });
@@ -114,6 +107,7 @@ public class ProblemListActivity extends AppCompatActivity {
                 }
                 break;
             }
+            default:break;
         }
 
         return super.onOptionsItemSelected(item);

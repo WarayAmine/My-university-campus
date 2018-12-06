@@ -12,10 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.eservices.waray.myuniversitycampus.entity.Problem;
-import com.eservices.waray.myuniversitycampus.model.ProblemViewModel;
+import com.eservices.waray.myuniversitycampus.viewmodel.ProblemViewModel;
 
 import java.text.SimpleDateFormat;
 
@@ -65,7 +64,6 @@ public class ProblemDetailFragment extends Fragment {
         }
 
         problemViewModel = ViewModelProviders.of(this).get(ProblemViewModel.class);
-
 
     }
 

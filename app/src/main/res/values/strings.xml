@@ -5,7 +5,8 @@
     <string name="title_problem_list">Mon campus</string>
     <string name="title_problem_detail">Les détails</string>
     <string name="add_new_problem_title">Ajouter</string>
-    <string name="add_new_problem">Ajouter un problème</string>
+    <string name="add_new_problem_1">Avez-vous repéré un problème ?</string>
+    <string name="add_new_problem_2">Ajoutez le !</string>
     <string name="add_new_problem_description">Description</string>
     <string name="add_new_problem_address">Adresse</string>
     <string name="add_new_problem_type">Type</string>
@@ -27,5 +28,7 @@
     <string name="the_problem">le problème</string>
     <string name="porblem_spotted">Repéré le </string>
     <string name="delete_problem_hint">Problème résolu ? Supprimez le !</string>
+    <string name="description_hint">Essayez de décrir brièvement le problème</string>
+    <string name="address_hint">Utilisez le bouton GO pour vous géolocaliser</string>
 
 </resources>

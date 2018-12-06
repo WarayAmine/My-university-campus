@@ -1,4 +1,4 @@
-package com.eservices.waray.myuniversitycampus.converters;
+package com.eservices.waray.myuniversitycampus.utils;
 
 import android.arch.persistence.room.TypeConverter;
 

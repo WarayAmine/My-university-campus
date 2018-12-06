@@ -21,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eservices.waray.myuniversitycampus.entity.Problem;
-import com.eservices.waray.myuniversitycampus.model.ProblemViewModel;
+import com.eservices.waray.myuniversitycampus.utils.Constants;
+import com.eservices.waray.myuniversitycampus.viewmodel.ProblemViewModel;
+import com.eservices.waray.myuniversitycampus.utils.FetchAddressIntentService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -71,19 +73,21 @@ public class AddNewProblemActivity extends AppCompatActivity
         textViewAddress = (TextView) findViewById(R.id.textViewAddress);
         textViewDescription = (TextView) findViewById(R.id.textViewDescription);
         button = (Button) findViewById(R.id.buttonCreate);
+
+        buttonGeocoder = findViewById(R.id.buttonGeocoder);
+        buttonGeocoder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startIntentService();
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 problem = new Problem(textViewAddress.getText().toString(),textViewDescription.getText().toString(),lat,lng,problemType,false,new Date(),new Date());
                 problemViewModel.insertProblem(problem);
                 startActivity(intent);
-            }
-        });
-        buttonGeocoder = findViewById(R.id.buttonGeocoder);
-        buttonGeocoder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startIntentService();
             }
         });
     }

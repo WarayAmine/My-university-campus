@@ -44,7 +44,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <service
-            android:name=".FetchAddressIntentService"
+            android:name=".utils.FetchAddressIntentService"
             android:exported="false"/>
 
         <activity android:name=".AddNewProblemActivity"></activity>
