@@ -138,10 +138,10 @@ public class Problem implements Serializable{
     }
 
     public static enum ProblemType {
-        ARBRE_TRAILLER("Arbre à trailler", 0),
+        ARBRE_TAILLER("Arbre à tailler", 0),
         ARBRE_ABATTRE("Arbre à abattre", 1),
         DETRUITS("Détruits", 2),
-        HAIE_TRAILLER("Haie à trailler", 3),
+        HAIE_TAILLER("Haie à tailler", 3),
         MAUVAISE_HERBE("Mauvaise herbe", 4),
         AUTRE("Autre", 5);
 

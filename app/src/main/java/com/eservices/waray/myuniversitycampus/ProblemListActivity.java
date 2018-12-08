@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.eservices.waray.myuniversitycampus.utils.ProblemsRecyclerViewAdapter;
+import com.eservices.waray.myuniversitycampus.ui.ProblemsRecyclerViewAdapter;
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 import com.eservices.waray.myuniversitycampus.viewmodel.ProblemViewModel;
 

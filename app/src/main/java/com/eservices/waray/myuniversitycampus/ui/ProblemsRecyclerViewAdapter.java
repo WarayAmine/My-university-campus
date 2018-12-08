@@ -1,4 +1,4 @@
-package com.eservices.waray.myuniversitycampus.utils;
+package com.eservices.waray.myuniversitycampus.ui;
 
 import android.content.Context;
 import android.content.Intent;

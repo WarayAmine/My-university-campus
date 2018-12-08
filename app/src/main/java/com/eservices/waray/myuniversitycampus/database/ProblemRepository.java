@@ -38,9 +38,6 @@ public class ProblemRepository {
     }
 
 
-
-
-
     public void deleteProblem(int id){new deleteProblemByIdAsyncTask(problemDao).execute(id);}
 
     public void deleteAll(){new deleteAllProblemsIdAsyncTask(problemDao).execute();}
