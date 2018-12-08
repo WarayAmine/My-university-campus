@@ -103,7 +103,8 @@ public class ProblemDetailFragment extends Fragment {
     }
 
     public void deleteProblem(int id){
-        problemViewModel.deleteProblemById(id);
+//        problemViewModel.deleteProblemById(id);
+        problemViewModel.solveProblem(id);
     }
 
 }

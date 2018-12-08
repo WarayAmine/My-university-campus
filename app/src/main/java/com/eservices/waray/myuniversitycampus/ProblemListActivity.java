@@ -70,8 +70,8 @@ public class ProblemListActivity extends AppCompatActivity {
         }
 
         problemViewModel = ViewModelProviders.of(this).get(ProblemViewModel.class);
-        mAdapter = new ProblemsRecyclerViewAdapter(this, problemViewModel.getAllProblems().getValue(), mTwoPane);
-        problemViewModel.getAllProblems().observe(this, new Observer<List<Problem>>() {
+        mAdapter = new ProblemsRecyclerViewAdapter(this, problemViewModel.getAllUnsolvedProblems().getValue(), mTwoPane);
+        problemViewModel.getAllUnsolvedProblems().observe(this, new Observer<List<Problem>>() {
 
             @Override
             public void onChanged(@Nullable List<Problem> allProblems) {

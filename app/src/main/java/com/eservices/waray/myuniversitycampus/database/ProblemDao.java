@@ -26,12 +26,15 @@ public interface ProblemDao {
     @Query("SELECT * FROM Problem WHERE id = :problemId")
     LiveData<Problem> getLiveDataProblemById (int problemId);
 
-    @Query("SELECT * FROM Problem ORDER BY date DESC")
-    LiveData<List<Problem>> getAllProblems();
+    @Query("SELECT * FROM Problem WHERE isSolved = 0 ORDER BY date DESC")
+    LiveData<List<Problem>> getAllUnsolvedProblems();
 
     @Query("DELETE FROM Problem")
     void deleteAll();
 
     @Query("DELETE FROM Problem WHERE id = :problemId")
     void deleteProblemById(int problemId);
+
+    @Query("UPDATE Problem SET isSolved = 1 WHERE id = :problemId")
+    void solveProblem(int problemId);
 }

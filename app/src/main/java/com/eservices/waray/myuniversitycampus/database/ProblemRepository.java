@@ -17,7 +17,7 @@ public class ProblemRepository {
     public ProblemRepository(Application application){
         ProblemRoomDatabase database = ProblemRoomDatabase.getDatabase(application);
         problemDao = database.problemDao();
-        allProblems = problemDao.getAllProblems();
+        allProblems = problemDao.getAllUnsolvedProblems();
     }
 
     public Problem getProblemById(int id){
@@ -29,8 +29,8 @@ public class ProblemRepository {
         return problemDao.getLiveDataProblemById(id);
     }
 
-    public LiveData<List<Problem>> getAllProblems(){
-        return problemDao.getAllProblems();
+    public LiveData<List<Problem>> getAllUnsolvedProblems(){
+        return problemDao.getAllUnsolvedProblems();
     }
 
     public void insertProblem(Problem problem){
@@ -41,6 +41,21 @@ public class ProblemRepository {
     public void deleteProblem(int id){new deleteProblemByIdAsyncTask(problemDao).execute(id);}
 
     public void deleteAll(){new deleteAllProblemsIdAsyncTask(problemDao).execute();}
+
+    public void solveProblem(int id){new solveProblemAsyncTask(problemDao).execute(id);}
+
+    private class solveProblemAsyncTask extends AsyncTask<Integer, Void, Void>{
+
+        private ProblemDao mAsyncTaskDao;
+
+        solveProblemAsyncTask(ProblemDao dao){ mAsyncTaskDao = dao;}
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            mAsyncTaskDao.solveProblem(integers[0]);
+            return null;
+        }
+    }
 
     private class deleteAllProblemsIdAsyncTask extends AsyncTask<Void, Void, Void>{
 

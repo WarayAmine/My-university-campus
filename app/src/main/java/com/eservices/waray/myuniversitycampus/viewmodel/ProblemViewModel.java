@@ -17,7 +17,7 @@ public class ProblemViewModel extends AndroidViewModel {
     public ProblemViewModel(Application application){
         super(application);
         problemRepository = new ProblemRepository(application);
-        allProblems = problemRepository.getAllProblems();
+        allProblems = problemRepository.getAllUnsolvedProblems();
     }
 
     public Problem getProblemById(int id){
@@ -28,8 +28,8 @@ public class ProblemViewModel extends AndroidViewModel {
         return problemRepository.getLiveDataProblem(id);
     }
 
-    public LiveData<List<Problem>> getAllProblems(){
-        return problemRepository.getAllProblems();
+    public LiveData<List<Problem>> getAllUnsolvedProblems(){
+        return problemRepository.getAllUnsolvedProblems();
     }
 
     public void insertProblem(Problem problem){
@@ -38,6 +38,10 @@ public class ProblemViewModel extends AndroidViewModel {
 
     public void deleteProblemById(int id){
         problemRepository.deleteProblem(id);
+    }
+
+    public void solveProblem(int id){
+        problemRepository.solveProblem(id);
     }
 
     public void deleteAllProblems(){
