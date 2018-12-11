@@ -25,16 +25,9 @@ import java.text.SimpleDateFormat;
  * on handsets.
  */
 public class ProblemDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
+
     public static final String ARG_ITEM_ID = "item_id";
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-//    private DummyContent.DummyItem mItem;
     private Problem mItem;
 
     private ProblemViewModel problemViewModel;
@@ -60,9 +53,7 @@ public class ProblemDetailFragment extends Fragment {
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getType().toString());
             }
-
         }
-
         problemViewModel = ViewModelProviders.of(this).get(ProblemViewModel.class);
 
     }
@@ -103,7 +94,6 @@ public class ProblemDetailFragment extends Fragment {
     }
 
     public void deleteProblem(int id){
-//        problemViewModel.deleteProblemById(id);
         problemViewModel.solveProblem(id);
     }
 

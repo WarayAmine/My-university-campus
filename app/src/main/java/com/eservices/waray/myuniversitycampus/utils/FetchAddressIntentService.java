@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+// Geocoder
 public class FetchAddressIntentService extends IntentService {
 
     private static final String TAG = "FetchAddressIS";
@@ -42,7 +43,6 @@ public class FetchAddressIntentService extends IntentService {
             return;
         }
 
-//        Location location = intent.getParcelableExtra(Constants.LOCATION_DATA_EXTRA);
         double lat = intent.getDoubleExtra(Constants.LOCATION_LAT,0);
         double lng = intent.getDoubleExtra(Constants.LOCATION_LNG,0);
 

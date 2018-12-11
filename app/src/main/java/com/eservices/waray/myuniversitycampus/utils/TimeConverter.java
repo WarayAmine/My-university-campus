@@ -4,6 +4,7 @@ import android.arch.persistence.room.TypeConverter;
 
 import java.util.Date;
 
+// the typeconverter used in the problem entity
 public class TimeConverter {
 
     @TypeConverter

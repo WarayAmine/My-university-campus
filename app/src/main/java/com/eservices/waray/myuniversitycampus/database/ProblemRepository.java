@@ -11,13 +11,11 @@ import java.util.List;
 public class ProblemRepository {
 
     private ProblemDao problemDao;
-    private LiveData<List<Problem>> allProblems;
-    Problem problem;
+    private Problem problem;
 
     public ProblemRepository(Application application){
         ProblemRoomDatabase database = ProblemRoomDatabase.getDatabase(application);
         problemDao = database.problemDao();
-        allProblems = problemDao.getAllUnsolvedProblems();
     }
 
     public Problem getProblemById(int id){
@@ -37,12 +35,15 @@ public class ProblemRepository {
         new insertAsyncTask(problemDao).execute(problem);
     }
 
-
     public void deleteProblem(int id){new deleteProblemByIdAsyncTask(problemDao).execute(id);}
 
+    // To empty the database
     public void deleteAll(){new deleteAllProblemsIdAsyncTask(problemDao).execute();}
 
+    // This is called when a problem is solved
     public void solveProblem(int id){new solveProblemAsyncTask(problemDao).execute(id);}
+
+    // This is where i create the asynchronus tasks that will be called from the methods ubove
 
     private class solveProblemAsyncTask extends AsyncTask<Integer, Void, Void>{
 

@@ -19,6 +19,7 @@ import com.eservices.waray.myuniversitycampus.entity.Problem;
 import com.eservices.waray.myuniversitycampus.viewmodel.ProblemViewModel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.eservices.waray.myuniversitycampus.utils.Constants.staticProblems;
 
@@ -54,8 +55,6 @@ public class ProblemListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_SHORT)
-//                        .setAction("Action", null).show();
                 intentNewProblem = new Intent(getApplicationContext(),AddNewProblemActivity.class);
                 startActivity(intentNewProblem);
             }
@@ -102,9 +101,7 @@ public class ProblemListActivity extends AppCompatActivity {
                 break;
             }
             case R.id.addAll : {
-                for (Problem p : staticProblems){
-                    problemViewModel.insertProblem(p);
-                }
+                fillDatabase();
                 break;
             }
             default:break;
@@ -115,6 +112,12 @@ public class ProblemListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView, ProblemsRecyclerViewAdapter problemsRecyclerViewAdapter) {
         recyclerView.setAdapter(problemsRecyclerViewAdapter);
+    }
+
+    private void fillDatabase(){
+        for (Problem p : staticProblems){
+            problemViewModel.insertProblem(p);
+        }
     }
 
 }

@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 import com.eservices.waray.myuniversitycampus.utils.Constants;
@@ -61,7 +60,6 @@ public class AddNewProblemActivity extends AppCompatActivity
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getLocation();
-//        startIntentService();
 
         intent = new Intent(this,ProblemListActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -74,6 +72,7 @@ public class AddNewProblemActivity extends AppCompatActivity
         textViewDescription = (TextView) findViewById(R.id.textViewDescription);
         button = (Button) findViewById(R.id.buttonCreate);
 
+        // this button launches the geocoding operation
         buttonGeocoder = findViewById(R.id.buttonGeocoder);
         buttonGeocoder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +94,6 @@ public class AddNewProblemActivity extends AppCompatActivity
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         problemType = Problem.ProblemType.getProblemType(position);
-        Toast.makeText(getApplicationContext(),problemType.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -103,6 +101,7 @@ public class AddNewProblemActivity extends AppCompatActivity
 
     }
 
+    // Here the permission is asked for the first time getting to this activity
     private void getLocation(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.getLastLocation()
@@ -113,7 +112,6 @@ public class AddNewProblemActivity extends AppCompatActivity
                                 location = loc;
                                 lat = loc.getLatitude();
                                 lng = loc.getLongitude();
-                                Toast.makeText(getApplicationContext(),"Lat : "+location.getLatitude()+" Long : "+location.getLongitude(),Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -199,7 +197,6 @@ public class AddNewProblemActivity extends AppCompatActivity
 
             // Display the address string or an error message sent from the intent service.
             address = resultData.getString(Constants.RESULT_DATA_KEY);
-            Toast.makeText(getApplicationContext(),address,Toast.LENGTH_SHORT).show();
             textViewAddress.setText(address);
 
         }

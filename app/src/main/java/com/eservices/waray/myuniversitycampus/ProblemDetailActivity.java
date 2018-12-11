@@ -75,10 +75,9 @@ public class ProblemDetailActivity extends AppCompatActivity {
                     .commit();
         }
 
-
-
     }
 
+    // Using the google maps intent to show the problem's location
     private void showProblemOnMap() {
         if(getIntent().getSerializableExtra(ARG_ITEM_ID)!=null){
             Problem problem = (Problem) getIntent().getSerializableExtra(ARG_ITEM_ID);
@@ -93,12 +92,6 @@ public class ProblemDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
             navigateUpTo(new Intent(this, ProblemListActivity.class));
             return true;
         }

@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 
 import com.eservices.waray.myuniversitycampus.entity.Problem;
 
+// This class is taken from the room tutorial for android developers
 @Database(entities = {Problem.class}, version = 2, exportSchema = false)
 public abstract class ProblemRoomDatabase extends RoomDatabase {
 
@@ -27,7 +28,7 @@ public abstract class ProblemRoomDatabase extends RoomDatabase {
                             "problem_database")
                             //drop tables and data when upgrading database
                             .fallbackToDestructiveMigration()
-                            .addCallback(callback)
+//                            .addCallback(callback)
                             .build();
                 }
             }
@@ -35,6 +36,9 @@ public abstract class ProblemRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    // This callback can be used if i want to fill the database for exemple when the database
+    // is created
+    // Disabled for the moment as i can fill the database somewhere else
     private static RoomDatabase.Callback callback = new RoomDatabase.Callback(){
 
         @Override
@@ -43,6 +47,7 @@ public abstract class ProblemRoomDatabase extends RoomDatabase {
             new PopulateDbAsync(INSTANCE).execute();
         }
     };
+
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
         private final ProblemDao problemDao;

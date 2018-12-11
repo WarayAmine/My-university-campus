@@ -9,15 +9,14 @@ import com.eservices.waray.myuniversitycampus.entity.Problem;
 
 import java.util.List;
 
+
 public class ProblemViewModel extends AndroidViewModel {
 
     private ProblemRepository problemRepository;
-    private LiveData<List<Problem>> allProblems;
 
     public ProblemViewModel(Application application){
         super(application);
         problemRepository = new ProblemRepository(application);
-        allProblems = problemRepository.getAllUnsolvedProblems();
     }
 
     public Problem getProblemById(int id){

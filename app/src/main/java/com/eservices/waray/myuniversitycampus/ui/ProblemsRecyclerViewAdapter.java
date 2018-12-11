@@ -26,16 +26,15 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
     private final ProblemListActivity mParentActivity;
     private List<Problem> mValues;
     private final boolean mTwoPane;
-    private Map<String, Integer> imagesMap = new HashMap<String, Integer>();
 
+    // I used the predefined activity template of Master/Detail flow, so this and other classes
+    // are generated
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-//                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
             Problem item = (Problem) view.getTag();
             if (mTwoPane) {
                 Bundle arguments = new Bundle();
-//                    arguments.putString(ProblemDetailFragment.ARG_ITEM_ID, item.id);
                 arguments.putSerializable(ProblemDetailFragment.ARG_ITEM_ID, item);
                 ProblemDetailFragment fragment = new ProblemDetailFragment();
                 fragment.setArguments(arguments);
@@ -58,10 +57,20 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
         mValues = items;
         mParentActivity = parent;
         mTwoPane = twoPane;
+        // Increasing the recyclerview performance by reusing the same viewholder for
+        // the unchanged elements on the list
         this.setHasStableIds(true);
-//        updateImagesMap();
     }
 
+    // Must override this method as we dont really have stable ids
+    // so we instead of returning the position, we return the item's real id
+    @Override
+    public long getItemId(int position) {
+        Problem p = mValues.get(position);
+        return p.getId();
+    }
+
+    // This is called to update the problems list of the adapter
     public void setAllProblems(List<Problem> problems){
         mValues = problems;
         notifyDataSetChanged();
@@ -74,25 +83,6 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
         return new ViewHolder(view);
     }
 
-    public void updateImagesMap(){
-        if(imagesMap.size()!=0)
-            mValues.clear();
-        for(Problem p : mValues){
-            String imgResource = "type"+p.getType().getTypeValue()+p.getType().getTypeValue();
-            try {
-                int imgId = R.mipmap.class.getField(imgResource).getInt(null);
-                imagesMap.put(imgResource,imgId);
-            } catch (IllegalAccessException | NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public long getItemId(int position) {
-        Problem p = mValues.get(position);
-        return p.getId();
-    }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
@@ -101,6 +91,7 @@ public class ProblemsRecyclerViewAdapter extends RecyclerView.Adapter<ProblemsRe
         holder.mAddress.setText(mValues.get(position).getAddress());
         holder.mDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(mValues.get(position).getDate()));
         holder.mType.setText(mValues.get(position).getType().toString());
+        // a solution to get the type icon dynamically using the type attribute of the problem
         String imgResource = "type"+mValues.get(position).getType().getTypeValue()+mValues.get(position).getType().getTypeValue();
         int imgID = 0;
         try {

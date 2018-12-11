@@ -12,6 +12,7 @@ import com.eservices.waray.myuniversitycampus.utils.TimeConverter;
 import java.io.Serializable;
 import java.util.Date;
 
+// This is our Problem table
 @Entity
 public class Problem implements Serializable{
 
@@ -36,6 +37,8 @@ public class Problem implements Serializable{
     @NonNull
     private boolean isSolved;
 
+    // Type converters are the way to manage dates and other data types
+    // on SQLite databases through Room
     @NonNull
     @TypeConverters(DateConverter.class)
     private Date date;
@@ -137,6 +140,7 @@ public class Problem implements Serializable{
         this.time = time;
     }
 
+    // An enumeration for the type attribute
     public static enum ProblemType {
         ARBRE_TAILLER("Arbre à tailler", 0),
         ARBRE_ABATTRE("Arbre à abattre", 1),
@@ -174,7 +178,6 @@ public class Problem implements Serializable{
         public String toString(){
             return typeName;
         }
-
 
     }
 
